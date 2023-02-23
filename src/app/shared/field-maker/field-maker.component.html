@@ -1,0 +1,90 @@
+<div [formGroup]="form" class="field-box">
+  <label [attr.for]="field.key">{{ field.label }}</label>
+
+  <div [ngSwitch]="field.controlType">
+    {{ field.formation }}
+    <input
+      *ngSwitchCase="'textbox'"
+      class="form-control input"
+      [formControlName]="field.key"
+      [id]="field.key"
+      [type]="field.type"
+      [value]="field.value"
+      [mask]="field.formation ? 'separator' : ''"
+    />
+
+    <input
+      *ngSwitchCase="'numberbox'"
+      class="form-control input"
+      [formControlName]="field.key"
+      [id]="field.key"
+      [type]="field.type"
+      [value]="field.value"
+    />
+
+    <input
+      *ngSwitchCase="'daterange'"
+      class="form-control input"
+      [formControlName]="field.key"
+      ngxDaterangepickerMd
+      [id]="field.key"
+      [type]="field.type"
+      [value]="field.value"
+    />
+
+    <textarea
+      *ngSwitchCase="'textarea'"
+      class="form-control input"
+      [formControlName]="field.key"
+      [id]="field.key"
+    ></textarea>
+
+    <select
+      *ngSwitchCase="'dropdown'"
+      [id]="field.key"
+      class="form-select input"
+      [formControlName]="field.key"
+    >
+      <option *ngFor="let opt of field.options" [value]="opt.key">
+        {{ opt.value }}
+      </option>
+    </select>
+
+    <div *ngSwitchCase="'radio'" class="input">
+      <label *ngFor="let opt of field.options">
+        {{ opt.key }}
+        <input
+          class="form-check-input"
+          type="radio"
+          [name]="field.key"
+          [formControlName]="field.key"
+          [value]="opt.value"
+        />
+      </label>
+    </div>
+
+    <input
+      *ngSwitchCase="'checkbox'"
+      class="form-check-input input"
+      [formControlName]="field.key"
+      [id]="field.key"
+      [type]="field.type"
+      [value]="field.value"
+    />
+
+    <span class="btn" *ngIf="mode === 'edit'" (click)="removeField(field.id)">
+      <i class="bi bi-trash3"></i>
+    </span>
+  </div>
+
+  <div class="errorMessage" *ngIf="form.get(field.key)!.invalid">
+    {{ field.label }} faced following problems:
+    <p *ngIf="form.get(field.key)!.errors!['pattern']">
+      Input format is Wrong!
+    </p>
+    <p *ngIf="form.get(field.key)!.errors!['required']">required!</p>
+    <p *ngIf="form.get(field.key)!.errors!['email']">
+      email format is not correct!
+    </p>
+  </div>
+</div>

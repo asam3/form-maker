@@ -1,0 +1,6 @@
+<div class="container" *ngIf="error">
+  <div class="alert alert-danger">Request failed!</div>
+</div>
+<div class="form-container" *ngIf="!error">
+  <app-form-maker [fields]="fields" [mode]="'show'"></app-form-maker>
+</div>

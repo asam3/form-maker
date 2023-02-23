@@ -1,0 +1,98 @@
+<div class="modal-container">
+  <div [formGroup]="detailsGroup">
+    <div class="input-box">
+      <label>Key:</label>
+      <input class="form-control" formControlName="key" />
+    </div>
+    <div class="input-box">
+      <label>Title:</label>
+      <input class="form-control" formControlName="label" />
+    </div>
+    <div class="input-box">
+      <label>Description:</label>
+      <textarea class="form-control" formControlName="description"></textarea>
+    </div>
+    <div class="input-box">
+      <label>Required:</label>
+      <input type="checkbox" formControlName="required" />
+    </div>
+    <ng-container *ngIf="field === 'textbox'">
+      <div class="input-box">
+        <label>Validation:</label>
+        <select class="form-select" formControlName="validation">
+          <option value="">None</option>
+          <option value="Email">Email</option>
+          <option value="Phone">Phone</option>
+        </select>
+      </div>
+      <div class="input-box">
+        <label>Foramtion:</label>
+        <select class="form-select" formControlName="formation">
+          <option value="">None</option>
+          <option value="3DigitsSeprated">3 digits seprated</option>
+        </select>
+      </div>
+    </ng-container>
+
+    <div class="input-box" [ngSwitch]="field">
+      <div *ngSwitchCase="'dropdown'">
+        <div formArrayName="options">
+          <h2>Options</h2>
+          <button type="button" class="btn" (click)="addOptions()">
+            + Add another options
+          </button>
+
+          <div *ngFor="let option of options.controls; let i = index">
+            <div [formGroupName]="i" class="row">
+              <div class="col-6">
+                <label>Key :</label>
+                <input class="form-control" type="text" formControlName="key" />
+              </div>
+              <div class="col-6">
+                <label>Value :</label>
+                <input
+                  class="form-control"
+                  type="text"
+                  formControlName="value"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div *ngSwitchCase="'radio'">
+        <div formArrayName="options">
+          <h2>Radio groups</h2>
+          <button type="button" class="btn" (click)="addOptions()">
+            + Add another options
+          </button>
+
+          <div *ngFor="let option of options.controls; let i = index">
+            <div [formGroupName]="i" class="row">
+              <div class="col-6">
+                <label>Key :</label>
+                <input class="form-control" type="text" formControlName="key" />
+              </div>
+              <div class="col-6">
+                <label>Value :</label>
+                <input
+                  class="form-control"
+                  type="text"
+                  formControlName="value"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-6">
+      <button class="btn btn-success" (click)="add()">Add</button>
+    </div>
+    <div class="col-6">
+      <button class="btn btn-outline-dark" (click)="close()">Cancel</button>
+    </div>
+  </div>
+</div>

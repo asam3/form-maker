@@ -1,0 +1,17 @@
+.input {
+  max-width: calc(100% - 100px);
+  display: inline-block;
+}
+
+.btn {
+  margin-left: 8px;
+}
+.field-box {
+  margin: 10px 0;
+}
+.form-check-input {
+  margin-right: 10px;
+}
+.errorMessage {
+  color: red;
+}

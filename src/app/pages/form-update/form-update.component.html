@@ -1,0 +1,104 @@
+<div class="container">
+  <div class="fw-bold">Update form:</div>
+  <div class="row form-info-box" [formGroup]="form">
+    <div class="col-3">
+      <label>Form id:</label>
+
+      <input
+        class="form-control"
+        formControlName="id"
+        name="form-id"
+        placeholder="form id"
+        type="number"
+      />
+    </div>
+    <div class="col-3">
+      <label>Form title:</label>
+
+      <input
+        class="form-control"
+        formControlName="title"
+        placeholder="form title"
+        type="text"
+      />
+    </div>
+    <div class="col-3">
+      <label>Users:</label>
+      <select class="form-select" formControlName="user">
+        <option value="All">All</option>
+        <option value="Ali Mousavi">Ali Mousavi</option>
+        <option value="Joe Teribiani">Joe Teribiani</option>
+      </select>
+    </div>
+    <div class="col-3">
+      <label>Roles:</label>
+      <select class="form-select" formControlName="role">
+        <option value="All">All</option>
+        <option value="Admin">Admin</option>
+        <option value="Supervisor">Supervisor</option>
+      </select>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-8">
+      <div class="alert alert-info" *ngIf="!fields">No data found</div>
+      <app-form-maker
+        *ngIf="showForm"
+        [fields]="fields"
+        [mode]="'edit'"
+        (remove)="removeField($event)"
+      ></app-form-maker>
+    </div>
+    <div class="col-4">
+      <button
+        class="btn btn-lg btn-outline-success"
+        (click)="addField('textbox')"
+      >
+        <i class="bi bi-plus-circle"></i> Text box
+      </button>
+      <button
+        class="btn btn-lg btn-outline-success"
+        (click)="addField('textarea')"
+      >
+        <i class="bi bi-plus-circle"></i> Text area
+      </button>
+      <button
+        class="btn btn-lg btn-outline-success"
+        (click)="addField('numberbox')"
+      >
+        <i class="bi bi-plus-circle"></i> Number box
+      </button>
+
+      <button
+        class="btn btn-lg btn-outline-success"
+        (click)="addField('dropdown')"
+      >
+        <i class="bi bi-plus-circle"></i> Drop down
+      </button>
+      <button
+        class="btn btn-lg btn-outline-success"
+        (click)="addField('radio')"
+      >
+        <i class="bi bi-plus-circle"></i> Radio button
+      </button>
+      <button class="btn btn-lg btn-outline-success" (click)="addField('date')">
+        <i class="bi bi-plus-circle"></i> Date
+      </button>
+      <button
+        class="btn btn-lg btn-outline-success"
+        (click)="addField('daterange')"
+      >
+        <i class="bi bi-plus-circle"></i> Date range
+      </button>
+      <button
+        class="btn btn-lg btn-outline-success"
+        (click)="addField('checkbox')"
+      >
+        <i class="bi bi-plus-circle"></i> Check box
+      </button>
+    </div>
+    <div class="col-2">
+      <button class="btn btn-success" (click)="update()">Update</button>
+    </div>
+  </div>
+</div>

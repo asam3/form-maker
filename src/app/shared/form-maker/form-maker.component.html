@@ -1,0 +1,27 @@
+<div class="container">
+  <form (ngSubmit)="onSubmit()" [formGroup]="form">
+    <div *ngFor="let field of fields">
+      <app-field-maker
+        [field]="field"
+        [form]="form"
+        [mode]="mode"
+        (remove)="removeField($event)"
+      ></app-field-maker>
+    </div>
+
+    <div class="col-2" style="margin-top: 20px">
+      <button
+        type="submit"
+        class="btn btn-success"
+        [disabled]="!form.valid"
+        *ngIf="mode === 'show' && form"
+      >
+        Submit
+      </button>
+    </div>
+  </form>
+
+  <div *ngIf="payLoad">
+    <strong>Send the following value to API</strong><br />{{ payLoad }}
+  </div>
+</div>
